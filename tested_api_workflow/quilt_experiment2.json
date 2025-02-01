@@ -1,0 +1,37 @@
+{
+  "20": {
+    "inputs": {
+      "image": ""
+    },
+    "class_type": "ETN_LoadImageBase64",
+    "_meta": {
+      "title": "Load Image (Base64)"
+    }
+  },
+  "21": {
+    "inputs": {
+      "format": "PNG",
+      "images": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "ETN_SendImageWebSocket",
+    "_meta": {
+      "title": "Send Image (WebSocket)"
+    }
+  },
+  "22": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "24": {
+    "inputs": {
+      "da_model": [
+        "25",
+        0
+      ],
+      "images": [
+        "39",
+        0
+      ]
+    },
+    "class_type": "DepthAnything_V2",
+    "_meta": {
+      "title": "Depth Anything V2"
+    }
+  },
+  "25": {
+    "inputs": {
+      "model": "depth_anything_v2_vitl_fp32.safetensors"
+    },
+    "class_type": "DownloadAndLoadDepthAnythingV2Model",
+    "_meta": {
+      "title": "DownloadAndLoadDepthAnythingV2Model"
+    }
+  },
+  "26": {
+    "inputs": {
+      "images": [
+        "24",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "28": {
+    "inputs": {
+      "strength": 1,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "30",
+        0
+      ],
+      "negative": [
+        "31",
+        0
+      ],
+      "control_net": [
+        "33",
+        0
+      ],
+      "image": [
+        "24",
+        0
+      ],
+      "vae": [
+        "29",
+        2
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "ControlNet应用（旧版高级）"
+    }
+  },
+  "29": {
+    "inputs": {
+      "ckpt_name": "8xl8_fp16.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Checkpoint加载器(简易)"
+    }
+  },
+  "30": {
+    "inputs": {
+      "text": "full_body, anime, indoors, 1 flower_knight_girl, miru_tights, ,blue_dress, ,cape,blonde_hair, white_gloves, ",
+      "clip": [
+        "29",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码器"
+    }
+  },
+  "31": {
+    "inputs": {
+      "text": "embedding:BadDream, embedding:badhandv4, ",
+      "clip": [
+        "29",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码器"
+    }
+  },
+  "32": {
+    "inputs": {
+      "seed": 148086461952485,
+      "steps": 20,
+      "cfg": 8,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "29",
+        0
+      ],
+      "positive": [
+        "28",
+        0
+      ],
+      "negative": [
+        "28",
+        1
+      ],
+      "latent_image": [
+        "34",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "33": {
+    "inputs": {
+      "control_net_name": "sdxl\\sdxl_depth2.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "ControlNet加载器"
+    }
+  },
+  "34": {
+    "inputs": {
+      "width": 840,
+      "height": 1120,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent"
+    }
+  },
+  "35": {
+    "inputs": {
+      "samples": [
+        "32",
+        0
+      ],
+      "vae": [
+        "29",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "37": {
+    "inputs": {
+      "direction": "right",
+      "match_image_size": true,
+      "image1": [
+        "24",
+        0
+      ],
+      "image2": [
+        "35",
+        0
+      ]
+    },
+    "class_type": "ImageConcanate",
+    "_meta": {
+      "title": "图像联结"
+    }
+  },
+  "39": {
+    "inputs": {
+      "image": ""
+    },
+    "class_type": "ETN_LoadImageBase64",
+    "_meta": {
+      "title": "Load Image (Base64)"
+    }
+  },
+  "40": {
+    "inputs": {
+      "format": "PNG",
+      "images": [
+        "37",
+        0
+      ]
+    },
+    "class_type": "ETN_SendImageWebSocket",
+    "_meta": {
+      "title": "Send Image (WebSocket)"
+    }
+  }
+}

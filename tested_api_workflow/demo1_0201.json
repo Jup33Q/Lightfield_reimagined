@@ -1,0 +1,193 @@
+{
+  "44": {
+    "inputs": {
+      "da_model": [
+        "45",
+        0
+      ],
+      "images": [
+        "56",
+        0
+      ]
+    },
+    "class_type": "DepthAnything_V2",
+    "_meta": {
+      "title": "Depth Anything V2"
+    }
+  },
+  "45": {
+    "inputs": {
+      "model": "depth_anything_v2_vitl_fp32.safetensors"
+    },
+    "class_type": "DownloadAndLoadDepthAnythingV2Model",
+    "_meta": {
+      "title": "DownloadAndLoadDepthAnythingV2Model"
+    }
+  },
+  "46": {
+    "inputs": {
+      "images": [
+        "44",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "47": {
+    "inputs": {
+      "strength": 1,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "49",
+        0
+      ],
+      "negative": [
+        "50",
+        0
+      ],
+      "control_net": [
+        "51",
+        0
+      ],
+      "image": [
+        "44",
+        0
+      ],
+      "vae": [
+        "48",
+        2
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "ControlNet应用（旧版高级）"
+    }
+  },
+  "48": {
+    "inputs": {
+      "ckpt_name": "8xl8_fp16.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Checkpoint加载器(简易)"
+    }
+  },
+  "49": {
+    "inputs": {
+      "text": "full_body,T standing, 1flower_knight_girl, white_pantyhose, pink_dress, platinum_blonde_hair,  cape, indoors,masterpiece,4k resolution",
+      "clip": [
+        "48",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码器"
+    }
+  },
+  "50": {
+    "inputs": {
+      "text": "embedding:EasyNegative, embedding:BadDream, embedding:badhandv4, ",
+      "clip": [
+        "48",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码器"
+    }
+  },
+  "51": {
+    "inputs": {
+      "control_net_name": "sdxl\\sdxl_depth2.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "ControlNet加载器"
+    }
+  },
+  "52": {
+    "inputs": {
+      "seed": 223070138678020,
+      "steps": 20,
+      "cfg": 8,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "48",
+        0
+      ],
+      "positive": [
+        "47",
+        0
+      ],
+      "negative": [
+        "47",
+        1
+      ],
+      "latent_image": [
+        "53",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "53": {
+    "inputs": {
+      "width": 720,
+      "height": 1120,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent"
+    }
+  },
+  "54": {
+    "inputs": {
+      "samples": [
+        "52",
+        0
+      ],
+      "vae": [
+        "48",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "56": {
+    "inputs": {
+      "image": ""
+    },
+    "class_type": "ETN_LoadImageBase64",
+    "_meta": {
+      "title": "Load Image (Base64)"
+    }
+  },
+  "57": {
+    "inputs": {
+      "format": "PNG",
+      "images": [
+        "54",
+        0
+      ]
+    },
+    "class_type": "ETN_SendImageWebSocket",
+    "_meta": {
+      "title": "Send Image (WebSocket)"
+    }
+  }
+}
