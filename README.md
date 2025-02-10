@@ -14,3 +14,5 @@ This is a collection of my TouchDesigner+Comfyui workflows that regenerates ligh
 
 ## a request for help
 #### currently I am using a single pc and one-piece-per-time mode for quilt re-gen, I hope anyone else understand my toe workflows can do parallel re-gen themself, and I hope there will be a set of comfyui tools that can do quilt re-gen more coherently on single seed
+
+## if you wish to combine all photoout into a quilts instead of photosets folders, plz visit https://lookinggloves.vercel.app/ provided by LKG
